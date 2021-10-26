@@ -13,6 +13,10 @@ app.use("/paket",paket)
 const users = require("./routers/users")
 app.use("/users",users)
 
+//call router transaksi
+const transaksi = require("./routers/transaksi")
+app.use("/transaksi",transaksi)
+
 app.listen(8000,()=>{
     console.log(`Server run on port 8000`)
 })
