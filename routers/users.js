@@ -48,8 +48,11 @@ app.put("/:id_user", (request,response)=>{
     let data ={
         nama: request.body.nama,
         username: request.body.username,
-        password: md5(request.body.password),
         role: request.body.role
+    }
+    
+    if (request.body.password){
+        data.password = md5(request.body.password)
     }
 
     let parameter = {
