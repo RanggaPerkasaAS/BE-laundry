@@ -138,4 +138,54 @@ app.delete("/:id_transaksi",  (request,response)=>{
     })
 })
 
+//endpoint untuk mengubah status transaksi
+app.post("/status/:id_transaksi", (request, response)=>{
+    //tampung nilai statusnya
+    let data ={
+        status: request.body.status
+    }
+
+    //kita tampung parameternya
+    let parameter = {
+        id_transaksi: request.params.id_transaksi
+    }
+
+    //proses update status transaksi
+    transaksi.update(data,{where: parameter})
+    .then(result =>{
+        return response.json({
+            message: `Data status berhasil diubah!`
+        })
+    })
+    .catch(error =>{
+        return response.json({
+            message: error.message
+        })
+    })
+})
+
+//endpoint untuk mengubah status pembayaran
+app.get("/bayar/:id_transaksi", (request,response)=>{
+    let parameter ={
+        id_transaksi : request.params.id_transaksi
+    }
+
+    let data ={
+        //mendapatkan tanggal saat ini 
+        tgl_bayar: new Date().toISOString().split("T")[0],
+        dibayar: true
+    }
+
+    transaksi.update(data, {where: parameter})
+    .then(result => {
+        return response.json({
+            message: `Transaksi telah dibayar`
+        })
+    })
+    .catch(error =>{
+        return response.json({
+            message: error.message
+        })
+    })
+})
 module.exports = app

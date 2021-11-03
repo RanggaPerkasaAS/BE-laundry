@@ -17,9 +17,9 @@ app.use("/users",users)
 const transaksi = require("./routers/transaksi")
 app.use("/transaksi",transaksi)
 
-// //call router transaksi
-// const login = require("./routers/login")
-// app.use("/login",login)
+//call router transaksi
+const login = require("./routers/login")
+app.use("/login",login)
 
 
 app.listen(8000,()=>{
