@@ -69,7 +69,7 @@ app.put("/:id_user", (request,response)=>{
     users.update(data,{where: parameter})
     .then(result => {
         return response.json({
-            message: `Data Paket berhasil diubah!`,
+            message: `Data User berhasil diubah!`,
             data:result
         })
     })

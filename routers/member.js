@@ -76,23 +76,24 @@ app.put("/:id_member", (request,response)=>{
 })
 
 //endpoint delete member
-app.delete("/", (request,response)=>{
-    let deleteMember = {
-        id_member: request.body.id_member
+app.delete("/:id_member", (request,response) => {
+    // tampung data yg akan dihapus
+    let parameter = {
+        id_member: request.params.id_member
     }
 
-    member.destroy({where:deleteMember})
+    // proses hapus
+    member.destroy({where: parameter})
     .then(result => {
-        response.json({
-            message:`Data berhasil dihapus!`
+        return response.json({
+            message: `Data berhasil dihapus`
         })
     })
-    .catch(error =>{
-        response.json({
-            message:error.message
+    .catch(error => {
+        return response.json({
+            message: error.message
         })
     })
 })
-
 
 module.exports = app

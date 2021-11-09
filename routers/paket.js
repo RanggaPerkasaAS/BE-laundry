@@ -72,20 +72,22 @@ app.put("/:id_paket", (request,response)=>{
 })
 
 //endpoint delete paket
-app.delete("/", (request,response)=>{
-    let deletePaket = {
-        id_paket: request.body.id_paket
+app.delete("/:id_paket", (request,response) => {
+    // tampung data yg akan dihapus
+    let parameter = {
+        id_paket: request.params.id_paket
     }
 
-    paket.destroy({where:deletePaket})
+    // proses hapus
+    paket.destroy({where: parameter})
     .then(result => {
-        response.json({
-            message:`Data berhasil dihapus!`
+        return response.json({
+            message: `Data Paket berhasil dihapus`
         })
     })
-    .catch(error =>{
-        response.json({
-            message:error.message
+    .catch(error => {
+        return response.json({
+            message: error.message
         })
     })
 })
