@@ -1,12 +1,12 @@
 const { request,response } = require("express")
 const express = require("express")
-const app = express()
+const login = express()
 const md5 = require("md5")
 const jwt = require("jsonwebtoken")
 const secretKey = "testestes"
 
 //membaca request bertipe json
-app.use(express.json())
+login.use(express.json())
 
 //memanggil model index
 const models = require("../models/index")
@@ -14,7 +14,7 @@ const models = require("../models/index")
 //memanggil model users
 const user = models.users
 
-app.post("/", async (request, response)=>{
+login.post("/", async (request, response)=>{
     let newLogin = {
         username : request.body.username,
         password : md5(request.body.password)
@@ -38,4 +38,35 @@ app.post("/", async (request, response)=>{
     }
 
 })
-module.exports = app
+
+//fungsi auth digunakan uuntuk verifikasi token yang dikirirmkan
+const auth = (request,response,next) => {
+    //dapatkan data authorization
+    let header = request.headers.authorization
+
+
+    //data tokennya
+    let token = header && header.split(" ")[1]
+
+    if(token == null){
+        return response.status(401).json({
+            message: `Unauthorized`
+        })
+    }else{
+        let jwtHeader ={
+            algorithm : "HS256"
+        }
+
+        //verivikasi token yang diberikan
+        jwt.verify(token,secretKey,jwtHeader, error => {
+            if(error){
+                return response.status(401).json({
+                    message: `Invalid token`
+                })
+            }else{
+                next()
+            }
+        })
+    }
+}
+module.exports = {login,auth}

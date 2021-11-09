@@ -18,7 +18,7 @@ const transaksi = require("./routers/transaksi")
 app.use("/transaksi",transaksi)
 
 //call router transaksi
-const login = require("./routers/login")
+const {login} = require("./routers/login")
 app.use("/login",login)
 
 

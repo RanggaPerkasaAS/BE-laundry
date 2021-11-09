@@ -11,6 +11,12 @@ const models = require("../models/index")
 //panggil model paket
 const paket = models.paket
 
+//panggil fungsi auth -> validasi token
+const {auth} = require("./login")
+
+//fungsi auth dijadikan middleware
+app.use(auth)
+
 //endpoint get all paket
 app.get("/", async (request,response)=>{
     let dataPaket = await paket.findAll()
