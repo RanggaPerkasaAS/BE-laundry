@@ -15,7 +15,7 @@ const paket = models.paket
 const {auth} = require("./login")
 
 //fungsi auth dijadikan middleware
-app.use(auth)
+// app.use(auth)
 
 //endpoint get all paket
 app.get("/", async (request,response)=>{

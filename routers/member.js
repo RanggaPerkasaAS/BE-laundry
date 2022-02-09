@@ -15,7 +15,7 @@ const member = models.member
 const {auth} = require("./login")
 
 //fungsi auth dijadikan middleware
-app.use(auth)
+// app.use(auth)
 
 //endpoint get all member
 app.get("/",async (request,response)=>{
