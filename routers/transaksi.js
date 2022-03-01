@@ -11,7 +11,7 @@ const models = require("../models/index")
 const {auth} = require("./login")
 
 //fungsi auth dijadikan middleware
-// app.use(auth)
+app.use(auth)
 
 const transaksi = models.transaksi
 const detail_transaksi = models.detail_transaksi
