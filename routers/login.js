@@ -25,6 +25,7 @@ login.post("/", async (request, response)=>{
 
     if(dataUser){
         let payload = JSON.stringify(dataUser)
+        //payload untuk menyimpan data yang akan dienkripsi
         let token = jwt.sign(payload,secretKey)
         return response.json({
             logged: true,
@@ -48,6 +49,7 @@ const auth = (request,response,next) => {
 
     //data tokennya
     let token = header && header.split(" ")[1]
+    //split digunakan untuk memecah sebuah string menjadi array berdasarkan spasi
 
     if(token == null){
         return response.status(401).json({
